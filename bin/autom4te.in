@@ -316,6 +316,10 @@ sub parse_args ()
       {
 	error "unknown language: $_"
 	  unless exists $language{lc $_};
+	foreach (@{$language{lc $_}})
+	  {
+	    s/\$SDKROOT/$ENV{SDKROOT}/;
+	  }
 	unshift @ARGV, @{$language{lc $_}};
       }
   } while @language;
